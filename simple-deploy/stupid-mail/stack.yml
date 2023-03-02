@@ -2,7 +2,7 @@
 version: "3.4"
 services:
   stupid-mail:
-    image: "lionants02/stupid-mail:a1"
+    image: "lionants02/stupid-mail:latest"
     ports:
       - "12385:8080"
     env_file: ./.env

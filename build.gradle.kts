@@ -1,14 +1,15 @@
 val ktor_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
-val prometeus_version : String by project
+val prometeus_version: String by project
 val kotlin_date_time: String by project
-val javaMailVersion: String by project
+val jakataMail: String by project
+val jakataAngusMail: String by project
 
 plugins {
     kotlin("jvm") version "1.8.10"
     id("io.ktor.plugin") version "2.2.4"
-                id("org.jetbrains.kotlin.plugin.serialization") version "1.8.10"
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.8.10"
 }
 
 group = "thanachai.nstda.th"
@@ -25,7 +26,8 @@ repositories {
 }
 
 dependencies {
-    implementation("jakarta.mail:jakarta.mail-api:$javaMailVersion")
+    implementation("jakarta.mail:jakarta.mail-api:$jakataMail")
+    implementation("org.eclipse.angus:jakarta.mail:$jakataAngusMail")
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:$kotlin_date_time")
     implementation("io.ktor:ktor-server-metrics-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-core-jvm:$ktor_version")

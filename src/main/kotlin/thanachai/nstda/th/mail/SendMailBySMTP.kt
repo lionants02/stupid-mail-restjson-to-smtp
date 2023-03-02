@@ -29,7 +29,7 @@ class SendMailBySMTP(private val config: AppEnv) : SendMail {
                     // timeout 5 Min
                     withTimeout(config.sendMailMillisecondsTimeout) {
                         try {
-                            syncSend(toEmail, bodyMessage, subject)
+                            syncSend(subject, toEmail, bodyMessage)
                         } catch (ex: Exception) {
                             log.error(ex.message, ex)
                         }
@@ -75,13 +75,14 @@ class SendMailBySMTP(private val config: AppEnv) : SendMail {
      *     // https://github.com/jakartaee/mail-api
      */
     private val prop by lazy {
-        Properties().apply {
-            this["mail.smtp.auth"] = config.smtpAuth
-            this["mail.smtp.starttls.enable"] = config.smtpEnableTls
-            this["mail.smtp.host"] = config.smtpHost
-            this["mail.smtp.port"] = config.smtpPort
-            this["mail.smtp.ssl.trust"] = config.smtpSSLTrust
-        }
+        val prop = Properties()
+        prop["mail.smtp.auth"] = config.smtpAuth.toString()
+        prop["mail.smtp.starttls.enable"] = config.smtpEnableTls.toString()
+        prop["mail.smtp.host"] = config.smtpHost
+        prop["mail.smtp.port"] = config.smtpPort
+        prop["mail.smtp.ssl.trust"] = config.smtpSSLTrust
+        log.info("prop is ${prop.toList()}")
+        prop
     }
 
     companion object {
