@@ -1,0 +1,80 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Stupid Mail",
+        "version": "0.0.1",
+        "description": "สำหรับ ส่งอีเมล์ด้วย Rest json to SMTP"
+    },
+    "servers": [],
+    "security": [
+        {
+            "api-key": []
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "api-key": {
+                "type": "apiKey",
+                "name": "api-key",
+                "in": "header",
+                "description": "api-key สำหรับใช้งาน api"
+            }
+        },
+        "schemas": {
+            "mailBody": {
+                "type": "object",
+                "description": "่body ข้อมูลสำหรับการส่งเมล์",
+                "properties": {
+                    "subject": {
+                        "type": "string",
+                        "description": "หัวเรื่อง email",
+                        "example": "test Subject"
+                    },
+                    "to": {
+                        "type": "string",
+                        "description": "email ปลายทางที่จะส่งไป",
+                        "example": "test@example.com"
+                    },
+                    "body": {
+                        "type": "string",
+                        "description": "ข้อความภายใน อีเมล์",
+                        "example": "วันนี้อากาศดีจัง"
+                    }
+                }
+            }
+        }
+    },
+    "paths": {
+        "/mail": {
+            "post": {
+                "tags": [
+                    "Send Mail"
+                ],
+                "description": "ส่งอีเมล์",
+                "summary": "ส่งอีเมล์",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/mailBody"
+                            }
+                        }
+                    },
+                    "required": true,
+                    "description": "ข้อมูลที่ใช้สำหรับส่งเมล์"
+                },
+                "responses": {
+                    "201": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "ดูจาก message"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        }
+    }
+}
