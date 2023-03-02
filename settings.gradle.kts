@@ -1,0 +1,1 @@
+rootProject.name = "thanachai.nstda.th.stupid-mail"
