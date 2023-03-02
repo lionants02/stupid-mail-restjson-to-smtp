@@ -1,7 +1,5 @@
 package thanachai.nstda.th.plugins
 
-import io.ktor.server.plugins.openapi.*
-import io.ktor.server.routing.*
 import io.ktor.http.*
 import io.ktor.http.content.*
 import io.ktor.server.plugins.cors.routing.*
@@ -15,9 +13,6 @@ import kotlinx.serialization.Serializable
 import thanachai.nstda.th.getLogger
 
 fun Application.configureHTTP() {
-    routing {
-        openAPI(path = "openapi")
-    }
     install(CachingHeaders) {
         options { call, outgoingContent ->
             when (outgoingContent.contentType?.withoutParameters()) {
