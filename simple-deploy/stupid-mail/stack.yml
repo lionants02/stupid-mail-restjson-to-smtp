@@ -1,0 +1,20 @@
+# docker stack deploy -c ./timescale-stack.yml homeward_timescale
+version: "3.4"
+services:
+  stupid-mail:
+    image: "lionants02/stupid-mail:a1"
+    ports:
+      - "12385:8080"
+    env_file: ./.env
+    healthcheck:
+      test: [ "CMD", "curl","--fail" ,"http://127.0.0.1:8080" ]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2100M
